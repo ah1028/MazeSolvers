@@ -2,7 +2,8 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from prims_generator import generate_maze, print_maze
+from MazeGenerator.recursive_maze import RecursiveMaze
 
-maze = generate_maze()
-print_maze(maze, 11, 27)
+recursive_maze = RecursiveMaze(rows=10, cols=10)
+recursive_maze.gen_maze()
+print(recursive_maze.maze[0][0].visited)

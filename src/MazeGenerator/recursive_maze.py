@@ -1,15 +1,20 @@
-from maze_cell import MazeCell, Direction
-from maze_generator import MazeGenerator
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from MazeGenerator.maze_cell import Direction, MazeCell
+from MazeGenerator.maze_generator import MazeGenerator
 from random import choice, randint
 
 class RecursiveMaze(MazeGenerator):
     def __init__(self, rows, cols):
-        super.__init__(rows, cols)
+        super().__init__(rows, cols)
         self.entrance, self.exit = self.set_entrance_n_exit()
     
     def set_entrance_n_exit(self):
-        start = [self.row_count-1, randint(self.col_count)]
-        end = [0, randint(self.col_count)]
+        start = [self.row_count-1, randint(0, self.col_count-1)]
+        end = [0, randint(0, self.col_count-1)]
         return start, end
 
     def gen_maze(self):
@@ -50,13 +55,13 @@ class RecursiveMaze(MazeGenerator):
 
             if available_count > 0:
                 direction = choice(available_moves)
-                if direction == Direction.Start:
+                if direction == Direction.START:
                     break
                 elif direction == Direction.RIGHT:
-                    self.visit_cell(self, r, c+1, Direction.RIGHT)
+                    self.visit_cell(r, c+1, Direction.RIGHT)
                 elif direction == Direction.FRONT:
-                    self.visit_cell(self, r+1, c, Direction.FRONT)
+                    self.visit_cell(r+1, c, Direction.FRONT)
                 elif direction == Direction.LEFT:
-                    self.visit_cell(self, r, c-1, Direction.LEFT)
+                    self.visit_cell(r, c-1, Direction.LEFT)
                 elif direction == Direction.BACK:
-                    self.visit_cell(self, r-1, c, Direction.BACK)
+                    self.visit_cell(r-1, c, Direction.BACK)
