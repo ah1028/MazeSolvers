@@ -7,7 +7,6 @@
 #Import libraries
 import random
 
-#Functions
 #Procedure prints the maze    
 def print_maze(maze, height, width):
     for i in range(0, height):
