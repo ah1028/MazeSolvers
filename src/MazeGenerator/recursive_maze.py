@@ -1,10 +1,16 @@
 from maze_cell import MazeCell, Direction
 from maze_generator import MazeGenerator
-from random import choice
+from random import choice, randint
 
 class RecursiveMaze(MazeGenerator):
     def __init__(self, rows, cols):
         super.__init__(rows, cols)
+        self.entrance, self.exit = self.set_entrance_n_exit()
+    
+    def set_entrance_n_exit(self):
+        start = [self.row_count-1, randint(self.col_count)]
+        end = [0, randint(self.col_count)]
+        return start, end
 
     def gen_maze(self):
         self.visit_cell(0, 0, Direction.START)
