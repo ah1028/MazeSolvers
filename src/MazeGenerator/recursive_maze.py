@@ -14,6 +14,7 @@ class RecursiveMaze(MazeGenerator):
         available_count = 0
         begin = True
         while available_count > 0 or begin:
+            begin = False
             available_count = 0
             if c + 1 < self.col_count and not self.get_cell(r, c+1).visited:
                 available_moves.append(Direction.RIGHT)
