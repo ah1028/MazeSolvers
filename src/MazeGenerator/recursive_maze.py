@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from MazeGenerator.maze_cell import Direction, MazeCell
+from MazeGenerator.maze_cell import Direction
 from MazeGenerator.maze_generator import MazeGenerator
 from random import choice, randint
 

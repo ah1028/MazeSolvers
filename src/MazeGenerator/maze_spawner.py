@@ -37,6 +37,7 @@ for r in range(rows):
         if cell.wall_right:
             maze_representation[r*2+1][c*2+2] = "# "
             maze_representation[r*2+2][c*2+2] = "# "
+            tmpId = ","
         elif c < cols-1 and not maze[r][c+1].wall_left:
             tmpId = f"{r}-{c+1},"
         else:
