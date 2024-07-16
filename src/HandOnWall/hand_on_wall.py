@@ -1,5 +1,6 @@
 import sys
 import os
+import math
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import MazeGenerator.maze_spawner as ms
@@ -15,10 +16,8 @@ cell = f"{r}-{c}"
 route = [cell]
 i = 1 % 4
 goal = True if [r, c] == exit else False
-count = 0
 
 while not goal:
-#while count < 10:
     can_move = False
     moves = graph[cell].split(",")
     moves = sorted(list(zip([2,3,1,0], moves))) # moves now {f, l, b, r}
@@ -45,4 +44,8 @@ while not goal:
 
     goal = True if [r, c] == exit else False
 
-print(route)
+dim = len(ms.maze_representation[0])*2
+print("SOLUTION".center(dim, "="))
+for r in range(len(ms.maze_representation)):
+    print("".join(ms.solved_maze(route, ms.maze_representation, entrance, exit)[r]))
+    

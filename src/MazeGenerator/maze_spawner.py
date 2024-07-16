@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from MazeGenerator.recursive_maze import RecursiveMaze
 
 graph = {}
-rows = 5
-cols = 3
+rows = 20
+cols = 20
 recursive_maze = RecursiveMaze(rows=rows, cols=cols)
 recursive_maze.gen_maze()
 maze = recursive_maze.maze
@@ -72,3 +72,25 @@ maze_representation[rows*2][exit[1]*2+1] = "  "
 
 for r in range(rows * 2 + 1):
     print("".join(maze_representation[r]))
+
+
+def solved_maze(route, maze_rep, ent, ext):
+    maze_rep[0][ent[1]*2+1] = ". "
+    maze_rep[2*ext[0]+2][ext[1]*2+1] = ". "
+    prev = ent
+
+    for cell in route:
+        r, c = cell.split("-")
+        r, c = int(r), int(c)
+        maze_rep[2*r+1][2*c+1] = ". "
+        if prev[0] < r:
+            maze_rep[2*r][2*c+1] = ". "
+        elif prev[0] > r:
+            maze_rep[2*r+2][2*c+1] = ". "
+        elif prev[1] < c:
+            maze_rep[2*r+1][2*c] = ". "
+        elif prev[1] > c:
+            maze_rep[2*r+1][2*c+2] = ". "
+        prev = [r, c]
+
+    return maze_rep
